@@ -9,3 +9,7 @@ How do small and large donors contribute to candidate and interest group PACs; w
 * Jess Duda, freelance web producer for PBS Interactive
 * Sven Kreiss, PhD Candidate, Particle Physics, New York University 
 * Ray Schwartz, Librarian, William Paterson University
+
+# Proof of Concept
+
+<iframe width='500' height='300' frameBorder='0' src='http://a.tiles.mapbox.com/v3/svenkreiss.test.html#3/39.9097/-99.7559'></iframe>
