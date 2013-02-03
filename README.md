@@ -1,4 +1,5 @@
 > This project is our team's entry for the [Bicoastal Datafest](http://www.bdatafest.computationalreporting.com).
+> Our project is documented here: [Project Page](http://www.bdatafest.computationalreporting.com/distribitionpacs)
 
 How do small and large donors contribute to candidate and interest group PACs; what is their ideology? Election campaigns and interest groups pour over their donor data, yet there is little public analysis of donor trends beyond the big donors and aggregates. Who are the millions of people donating; where do they live; how much do they donate; where do they fall on the political spectrum?  Find out in this heat map of political donors to the presidency, Senate and House races of 2012. 
 
