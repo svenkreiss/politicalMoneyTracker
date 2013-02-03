@@ -1,3 +1,9 @@
+# custom stuff for this project
+zipcode.csv
+test.csv
+ideologyDistribution.csv
+pacIdeology.csv
+
 *.py[cod]
 
 # C extensions
