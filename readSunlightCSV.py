@@ -65,7 +65,14 @@ def main():
          if zc not in zipCodes: zipCodes[ zc ] = {
             "amount":0.0,
             "ideologyScore":0.0,
-            "plot1":0.0
+            "plot1":0.0,
+            "plot2":0.0,
+            "plot3":0.0,
+            "plot4_M":0.0,
+            "plot4_F":0.0,
+            "plot4_FM":0.0,
+            "plot10":0.0,
+            "plot10_amount":0.0,
          }
 
 
@@ -80,16 +87,47 @@ def main():
             idEntry = int(  (ideologyScore.getIS(row[33])[0]+1.0)/2.0  *  len(ideologyDistribution)  )
             ideologyDistribution[ idEntry ] += float(row[8])
             
-         # include refunds
-         zipCodes[ zc ]["amount"] += float(row[8])
-         
-         
-         ### Plots
-         # 1)
-         # recipient_type=O,P; seat=federal:senate,federal:house,federal:president
-         if row[28] in ["O","P"] and row[38] in ["federal:senate","federal:house","federal:president"]:
-            zipCodes[ zc ]["plot1"] += float(row[8])
+            # include refunds
+            zipCodes[ zc ]["amount"] += float(row[8])
+            
+            #print( row[28]+","+row[38] )
+            
+            ### Plots
+            # 1)
+            # recipient_type=O,P; seat=federal:senate,federal:house,federal:president
+            if row[28] in ["C","O","P"] and row[38] in ["federal:senate","federal:house","federal:president"]:
+               zipCodes[ zc ]["plot1"] += 1.0
+
+            # 2)
+            # recipient_type=O,P; seat=federal:senate,federal:house,federal:president
+            if row[28] in ["C","O","P"] and row[38] in ["federal:senate","federal:house","federal:president"]:
+               zipCodes[ zc ]["plot2"] += float(row[8])
+#                
+#             # 2)
+#             # recipient_type=O,P; seat=federal:senate,federal:house,federal:president
+#             if row[28] in ["C","O","P"] and row[38] in ["federal:senate","federal:house","federal:president"]:
+#                weight = float(row[8]) / (zipCodes[ zc ]["plot2"]+float(row[8]))
+#                zipCodes[ zc ]["plot2"] = (1.-weight)*zipCodes[ zc ]["plot2"]  +  weight*ideologyScore.getIS(row[33])[0]
+# 
+            # 3)
+            # recipient_type=O
+            if row[28] in ["C","O"]:
+               zipCodes[ zc ]["plot3"] += 1.0
                 
+            # 4)
+            # recipient_type=O
+            if row[28] in ["C","O"]:
+               if row[15] == "M": zipCodes[ zc ]["plot4_M"] += 1.0
+               elif row[15] == "F": zipCodes[ zc ]["plot4_F"] += 1.0
+               else: zipCodes[ zc ]["plot4_FM"] += 1.0
+               
+            # 10)
+            # recipient_type=P; seat=federal:senate,federal:house
+            if row[28] in ["P"] and row[38] in ["federal:senate","federal:house"]:
+               weight = float(row[8]) / (zipCodes[ zc ]["plot10_amount"]+float(row[8]))
+               zipCodes[ zc ]["plot10"] = (1.-weight)*zipCodes[ zc ]["plot10"]  +  weight*ideologyScore.getIS(row[33])[0]
+               zipCodes[ zc ]["plot10_amount"] += float(row[8])
+               #print( str(zipCodes[ zc ]["plot10"])+","+str(zipCodes[ zc ]["plot10_amount"]) )
 
 
          if options.verbose:            
@@ -109,8 +147,8 @@ def main():
    print( "Amount with valid zipcodes: $%.2fB out of $%.2fB." % (sumWithZipCodes/1000000000,sum/1000000000) )
    
    
+   infoKeys = sorted( zipLatLonInfo[0][2].keys() )
    fOut = open( options.output, "w" )
-   infoKeys = zipLatLonInfo[0][2].keys()
    fOut.write( "lat,lon," )
    fOut.write( ",".join(infoKeys)+"\n" )
    for zc,latLon,info in zipLatLonInfo:
@@ -118,6 +156,23 @@ def main():
       for ik in infoKeys: fOut.write( ","+str(info[ik]) )
       fOut.write( "\n" )
    fOut.close()
+
+   for iK in infoKeys:
+      if "_amount" in iK: continue
+      fOut = open( options.output.replace(".csv",iK+".csv"), "w" )
+      fOut.write( "lat,lon,"+iK )
+      if iK+"_amount" in infoKeys:
+         fOut.write( ","+iK+"_amount" )
+      fOut.write( "\n" )
+      for zc,latLon,info in zipLatLonInfo:
+         if info[ik] != 0.0:
+            fOut.write( str(latLon[0])+","+str(latLon[1])+","+str(info[ik]) )
+            if iK+"_amount" in infoKeys:
+               fOut.write( ","+str( info[iK+"_amount"] ) )
+            fOut.write( "\n" )
+            if iK == "plot10":
+               print( str(info[iK])+","+str(info[iK+"_amount"]) )
+      fOut.close()
 
    # write ideologyDistribution
    fOut = open( options.ideologyDistributionOutput, "w" )
