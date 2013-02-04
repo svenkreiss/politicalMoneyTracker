@@ -8,10 +8,11 @@ How do small and large donors contribute to candidate and interest group PACs; w
 
 * Michael Schwam-Baird, PhD Candidate Political Science, Columbia University 
 * Jess Duda, freelance web producer for PBS Interactive
-* Sven Kreiss, PhD Candidate, Particle Physics, New York University 
+* [Sven Kreiss](http://www.svenkreiss.com), PhD Candidate, Particle Physics, New York University
 * Ray Schwartz, Librarian, William Paterson University
 
 
-# Proof-of-Concept
+# Proof-of-Concept (click for interactive map)
 
+[![testMap](http://a.tiles.mapbox.com/v3/svenkreiss.test/-99.76,39.91000000000001,3/640x480.png)](http://tiles.mapbox.com/svenkreiss/map/test)<br />
 <iframe width='500' height='300' frameBorder='0' src='http://a.tiles.mapbox.com/v3/svenkreiss.test.html#3/39.9097/-99.7559'></iframe>
