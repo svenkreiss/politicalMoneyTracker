@@ -22,6 +22,6 @@ Donations to members of Congress were then assigned the ideology score of their 
 
 # Proof-of-Concept
 
-The map below shows all transactions from the [Inference Explorer's bulk data](http://data.influenceexplorer.com/bulk/) by zip code. The size of the circle corresponds to the size of the transaction and the color corresponds to the ideology score.
+The map below shows all transactions from the [Inference Explorer's bulk data](http://data.influenceexplorer.com/bulk/) by zip code. The size of the circle corresponds to the size of the transaction and the color corresponds to the ideology score. There is also an [interactive version](http://tiles.mapbox.com/svenkreiss/map/test).
 
 [![testMap](http://a.tiles.mapbox.com/v3/svenkreiss.test/-99.76,39.91000000000001,3/640x480.png)](http://tiles.mapbox.com/svenkreiss/map/test)
